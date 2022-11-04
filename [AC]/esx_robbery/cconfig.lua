@@ -1,0 +1,3 @@
+CConfig = {}
+
+CConfig.AntiEulen = false

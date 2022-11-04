@@ -1,0 +1,24 @@
+!!BELANGRIJK: VOEG AL JE SCRIPTS TOE DIE JE GETOKENIZED HEBT IN CONFIG.LUA, ANDERS WORD DE SPELER GEFALSEBANNED!!
+--------------------------------------------------------------------------------------------------------------------
+Client-Sided script:
+--------------------------------------------------------------------------------------------------------------------
+ESX.TriggerServerCallback('esx_anticheat:server:getVerifyToken', function(token, eventname)
+	verifyToken = token
+	RegisterNetEvent(eventname)
+	AddEventHandler(eventname, function(token)
+		verifyToken = token
+	end, GetCurrentResourceName(), 1)
+end)
+--------------------------------------------------------------------------------------------------------------------
+Server-Sided script:
+--------------------------------------------------------------------------------------------------------------------
+local verifyToken = exports['esx_anticheat']:verifyToken(GetCurrentResourceName(), source, token, 1 [EVENTUELE NUMMER DIE JE OOK IN DIE FILE HEBT INGEVULD])
+
+    if verifyToken then
+--------------------------------------------------------------------------------------------------------------------
+Toevoegen bij: es_extended -> server -> main.lua ONDER TriggerEvent('esx:playerLoaded'):
+--------------------------------------------------------------------------------------------------------------------
+exports['esx_anticheat']:loadPlayer(_source, xPlayer.identifier)
+of
+exports['esx_anticheat']:loadPlayer(playerId, xPlayer.identifier)
+--------------------------------------------------------------------------------------------------------------------
